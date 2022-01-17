@@ -23,7 +23,8 @@ var ball = {
 
 function setup(){
   var canvas =  createCanvas(700,600);
-  canvas.center();
+  //canvas.center();
+  canvas.parent('canvas');
 }
 
 
@@ -162,4 +163,11 @@ function paddleInCanvas(){
   if(mouseY < 0){
     mouseY =0;
   }  
+}
+
+
+
+
+function restart(){
+  window.location.reload("index.html");
 }
