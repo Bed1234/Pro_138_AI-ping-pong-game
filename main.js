@@ -23,8 +23,23 @@ var ball = {
 
 function setup(){
   var canvas =  createCanvas(700,600);
-  //canvas.center();
+ //set the canvas in proper html element
   canvas.parent('canvas');
+  //create the webcam live view
+  video = createCapture(VIDEO);
+  //hidding the extra components
+  video.hide();
+  //set the size of the video
+  video.size(700,600);
+  //passing webcam view, x coordinate , y coordinate, width and height of the canvas
+  image (video, 0, 0, 700, 600);
+
+  //initializing pose net model 
+  poseNet = ml5.poseNet(video, modelLoaded);
+
+}
+function modelLoaded(){
+  console.log("Model is loaded");
 }
 
 
