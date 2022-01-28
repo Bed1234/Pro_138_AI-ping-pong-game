@@ -1,3 +1,9 @@
+// var of wrists
+right_wrist_x = "";
+right_wrist_y = "";
+// right wrist score
+right_wrist_score = "";
+left_wrist_score = "";
 
 /*created by prashant shukla */
 
@@ -32,25 +38,44 @@ function setup(){
   //set the size of the video
   video.size(700,600);
   //passing webcam view, x coordinate , y coordinate, width and height of the canvas
-  image (video, 0, 0, 700, 600);
+ 
 
   //initializing pose net model 
   poseNet = ml5.poseNet(video, modelLoaded);
+ poseNet.on('pose', gotPoses);
+  
 
 }
+
 function modelLoaded(){
   console.log("Model is loaded");
 }
-
+function gotPoses(results){
+  if (results.length > 0) {
+    console.log(results);
+    right_wrist_x = results[0].pose.rightWrist.x;
+    right_wrist_y = results[0].pose.rightWrist.y;
+    
+    right_wrist_score = results[0].pose.keypoints[10].score;
+   
+  }
+}
 
 function draw(){
 
+ 
  background(0); 
-
+ image (video, 0, 0, 700, 600);
+ 
  fill("black");
  stroke("black");
  rect(680,0,20,700);
 
+ if (right_wrist_score > 0.2) {
+  fill('#0000FF');
+  stroke('#0000FF');
+  circle(right_wrist_x , right_wrist_y , 50);
+}
  fill("black");
  stroke("black");
  rect(0,0,20,700);
