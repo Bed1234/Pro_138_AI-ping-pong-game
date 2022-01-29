@@ -3,7 +3,7 @@ right_wrist_x = "";
 right_wrist_y = "";
 // right wrist score
 right_wrist_score = "";
-left_wrist_score = "";
+game_status = "";
 
 /*created by prashant shukla */
 
@@ -60,9 +60,16 @@ function gotPoses(results){
    
   }
 }
-
+function startGame()
+{
+  game_status = "start";
+  document.getElementById("status").innerHTML = "Game is loaded";
+}
 function draw(){
 
+  if (game_status == "start") {
+    
+  }
  
  background(0); 
  image (video, 0, 0, 700, 600);
